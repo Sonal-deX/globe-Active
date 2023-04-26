@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+
+
+<head>
+    <title>Globactiv Logistics | Connections Made Simple</title>
+    <link rel="shortcut icon" type="image/jpg" href="/fv.png" />
+    <meta name="author" content="Nile-Theme">
+    <meta name="robots" content="index follow">
+    <meta name="googlebot" content="index follow">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="keywords"
+        content="cargo, clean, contractor, corporate, freight, industry, localization, logistics, modern, shipment, transport, transportation, truck, trucking">
+    <meta name="description" content="Transportation and Logistics">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- google fonts -->
+    <link
+        href="../../../fonts.googleapis.com/csse63f.css?family=Open+Sans:400,600,800%7CPoppins:300i,300,400,500,600,700,400i,500%7CDancing+Script:700%7CDancing+Script:700%7CGreat+Vibes:400%7CPoppins:400%7CDosis:800%7CRaleway:400,700,800&amp;subset=latin-ext"
+        rel="stylesheet">
+    <!-- animate -->
+    <link rel="stylesheet" href="/css/animate.css" />
+    <!-- owl Carousel assets -->
+    <link href="/css/owl.carousel.css" rel="stylesheet">
+    <link href="/css/owl.theme.css" rel="stylesheet">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- hover anmation -->
+    <link rel="stylesheet" href="/css/hover-min.css">
+    <!-- flag icon -->
+    <link rel="stylesheet" href="/css/flag-icon.min.css">
+    <!-- main style -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- elegant icon -->
+    <link rel="stylesheet" href="/css/elegant_icon.css">
+
+    <!-- jquery library  -->
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <!-- fontawesome  -->
+    <link rel="stylesheet" href="/fonts/font-awesome/css/font-awesome.min.css">
+
+    <style>
+        .table {
+            border: 1px solid black;
+            min-width: 500px;
+        }
+
+        .table th,
+        td {
+            white-space: nowrap;
+        }
+
+        .table-wrap {
+            max-height: 400px;
+            overflow-y: scroll;
+            margin: 20px 50px;
+        }
+
+        @media (max-width: 600px) {
+            .table-wrap {
+                margin: 10px 20px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .table-wrap {
+                margin: 5px 10px;
+            }
+        }
+
+        .input {
+            background-color: aqua;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!--  Header  -->
+    <%-include ('./partials/header')%>
+        <!-- // Header  -->
+
+        <div class="page-title mb-5">
+            <div class="container">
+                <div class="padding-tb-120px">
+                    <h1>Vessel Schedule</h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li class="active">vessel-schedule</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+
+        <form>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <div class="form-group">
+                            <p class="mb-0">whare do you want to ship from</p>
+                            <select class="form-control" style="border-color: #E53935; border-radius: 30px;" name="pol"
+                                id="pol" onchange="polName()">
+                                <option value="">
+                                    <%= select.polName || "Port of Loading" %>
+                                </option>
+                                <% for(let data of POL){%>
+                                    <option value=<%=data.id%>>
+                                        <%=data.name%>
+                                    </option>
+                                    <%}%>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="form-group">
+                            <p class="mb-0">whare do you want to ship to</p>
+                            <select class="form-control" style="border-color: #E53935;border-radius: 30px;" name="pod"
+                                id="pod" onchange="podName()">
+                                <option value="">
+                                    <%= select.podName || "Port of Discharge" %>
+                                </option>
+                                <% for(let data of POD){%>
+                                    <option value=<%=data.id%>>
+                                        <%=data.name%>
+                                    </option>
+                                    <%}%>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center" style="margin-top: 23px;">
+                        <div>
+                            <button class="btn" style="width: 170px; border-radius: 30px; background-color: #E53935;"
+                                type="submit"><a href="" id="req" onclick="req()"
+                                    style="color: white;padding: 10px 40px;">submit</a></button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form><br>
+
+        <script>
+
+            let polname = ""
+            let podname = ""
+
+            const polName = function () {
+                var select = document.querySelector("#pol")
+                polname = select.options[select.selectedIndex].text
+            }
+
+            const podName = function () {
+                var select = document.querySelector("#pod")
+                podname = select.options[select.selectedIndex].text
+            }
+
+            function req() {
+                var pol = document.querySelector("#pol").value
+                var pod = document.querySelector("#pod").value
+                document.querySelector("#req").href = `/Vessel-Schedule?pol=${pol}&pod=${pod}&polName=${polname}&podName=${podname}`;
+            }
+        </script>
+
+
+
+
+        <div class="table-wrap">
+            <p style="font-weight: bold; display: inline;;">Current Search:</p>
+            <p style="display: inline;">Place of Receipt <%= select.polName %>
+            </p>
+            <p style="display: inline;">to</p>
+            <p style="display: inline;">Destination <%= select.podName %>
+            </p>
+            <table class="table table-bordered">
+                <tr style="background-color:#E53935;">
+                    <th class="text-white" style="border-top-left-radius: 25px ; border: 1px solid white;">POL</th>
+                    <th class="text-white">VESSEL</th>
+                    <th class="text-white">VOYAGE</th>
+                    <th class="text-white">BOOKING CUT OFF</th>
+                    <th class="text-white">CFS CUT OFF</th>
+                    <th class="text-white">CV CUTOFF</th>
+                    <th class="text-white">ETD</th>
+                    <th class="text-white">ETA</th>
+                    <th class="text-white">TRANSSHIPMENT HUB</th>
+                    <th class="text-white" style="border-top-right-radius: 25px ; border: 1px solid white;">POD</th>
+                </tr>
+
+                <% for(let data of all){%>
+                    <tr>
+                        <td>
+                            <%=data.pol.name%>
+                        </td>
+                        <td>
+                            <%=data.vessel.name%>
+                        </td>
+                        <td>
+                            <%=data.voyage%>
+                        </td>
+                        <td>
+                            <%=data.bkg_cutoff%>
+                        </td>
+                        <td>
+                            <%=data.cfs_closing%>
+                        </td>
+                        <td>
+                            <%=data.cy_cutoff%>
+                        </td>
+                        <td>
+                            <%=data.etd%>
+                        </td>
+                        <td>
+                            <%=data.eta_cmb%>
+                        </td>
+                        <td>
+                            <%=data.transhipment_hub.name%>
+                        </td>
+                        <td>
+                            <%=data.discharge.name%>
+                        </td>
+                    </tr>
+                    <%}%>
+
+            </table>
+        </div>
+
+
+
+        <%-include ('./partials/footer')%>
+
+
+            <%-include ('./partials/scripts')%>
+
+</body>
+
+
+
+</html>
