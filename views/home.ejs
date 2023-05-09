@@ -218,52 +218,69 @@
 
         <div class="vsform"></div>
 
+        <div class="text-center">
+            <h1 style="color: red;">Vessel Schedules</h1>
+            <p>Plan your cargo bookings on our platform with easy access to departure schedules</p>
+        </div><br>
+
         <form>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 text-center">
+                    <div class="col-md-6 text-center">
                         <div class="form-group">
                             <p class="mb-0">whare do you want to ship from</p>
                             <select class="form-control" style="border-color: #E53935; border-radius: 30px;" name="pol"
                                 id="pol" onchange="polName()">
                                 <option value="">
-                                    <%= select.polName || "Port of Loading" %>
+                                    <%= select.polName || "Origin" %>
+                                </option>
+                                <option value="0">
+                                    <%="ALL" %>
                                 </option>
                                 <% for(let data of POL){%>
+
+                                    <%if(data.name != "-"){%>
+                                    
                                     <option value=<%=data.id%>>
                                         <%=data.name%>
                                     </option>
                                     <%}%>
+                                    <%}%>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4 text-center">
+                    <div class="col-md-6 text-center">
                         <div class="form-group">
                             <p class="mb-0">whare do you want to ship to</p>
                             <select class="form-control" style="border-color: #E53935;border-radius: 30px;" name="pod"
                                 id="pod" onchange="podName()">
                                 <option value="">
-                                    <%= select.podName || "Port of Discharge" %>
+                                    <%= select.podName || "Destination" %>
+                                </option>
+                                <option value="0">
+                                    <%="ALL" %>
                                 </option>
                                 <% for(let data of POD){%>
+                                     <%if(data.name != "-"){%>
+                                    
                                     <option value=<%=data.id%>>
                                         <%=data.name%>
                                     </option>
                                     <%}%>
+                                    <%}%>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4 text-center" style="margin-top: 23px;">
+                    </div>
+                    <div class="text-center" style="margin-top: 23px;">
                         <div>
-                            <button class="btn w-100" style="border-radius: 30px; background-color: #E53935;"
+                            <button class="btn w-20" style="border-radius: 30px; background-color: #E53935;"
                                 type="submit"><a href="" id="req" onclick="req()"
                                     style="color: white;padding: 10px 40px;">Submit</a></button>
                         </div>
-
-                    </div>
                 </div>
             </div>
-        </form><br>
+        </form><br><br>
 
         <script>
 
@@ -288,66 +305,6 @@
         </script>
 
 
-
-
-        <div class="table-wrap">
-            <p style="font-weight: bold; display: inline;;">Current Search:</p>
-            <p style="display: inline;">Place of Receipt <%= select.polName %>
-            </p>
-            <p style="display: inline;">to</p>
-            <p style="display: inline;">Destination <%= select.podName %>
-            </p>
-            <table class="table table-bordered">
-                <tr style="background-color:#E53935;">
-                    <th class="text-white" style="border-top-left-radius: 25px ; border: 1px solid white;">POL</th>
-                    <th class="text-white">VESSEL</th>
-                    <th class="text-white">VOYAGE</th>
-                    <th class="text-white">BOOKING CUT OFF</th>
-                    <th class="text-white">CFS CUT OFF</th>
-                    <th class="text-white">CV CUTOFF</th>
-                    <th class="text-white">ETD</th>
-                    <th class="text-white">ETA</th>
-                    <th class="text-white">TRANSSHIPMENT HUB</th>
-                    <th class="text-white" style="border-top-right-radius: 25px ; border: 1px solid white;">POD</th>
-                </tr>
-
-                <% for(let data of all){%>
-                    <tr>
-                        <td>
-                            <%=data.pol.name%>
-                        </td>
-                        <td>
-                            <%=data.vessel.name%>
-                        </td>
-                        <td>
-                            <%=data.voyage%>
-                        </td>
-                        <td>
-                            <%=data.bkg_cutoff%>
-                        </td>
-                        <td>
-                            <%=data.cfs_closing%>
-                        </td>
-                        <td>
-                            <%=data.cy_cutoff%>
-                        </td>
-                        <td>
-                            <%=data.etd%>
-                        </td>
-                        <td>
-                            <%=data.eta_cmb%>
-                        </td>
-                        <td>
-                            <%=data.transhipment_hub.name%>
-                        </td>
-                        <td>
-                            <%=data.discharge.name%>
-                        </td>
-                    </tr>
-                    <%}%>
-
-            </table>
-        </div>
 
         <!--============= About Us =============-->
         <div class="nile-about-section">

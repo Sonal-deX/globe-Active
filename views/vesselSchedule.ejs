@@ -102,12 +102,19 @@
                             <select class="form-control" style="border-color: #E53935; border-radius: 30px;" name="pol"
                                 id="pol" onchange="polName()">
                                 <option value="">
-                                    <%= select.polName || "Port of Loading" %>
+                                    <%= select.polName || "Origin" %>
+                                </option>
+                                <option value="0">
+                                    <%="ALL" %>
                                 </option>
                                 <% for(let data of POL){%>
+
+                                    <%if(data.name != "-"){%>
+                                    
                                     <option value=<%=data.id%>>
                                         <%=data.name%>
                                     </option>
+                                    <%}%>
                                     <%}%>
                             </select>
                         </div>
@@ -118,21 +125,27 @@
                             <select class="form-control" style="border-color: #E53935;border-radius: 30px;" name="pod"
                                 id="pod" onchange="podName()">
                                 <option value="">
-                                    <%= select.podName || "Port of Discharge" %>
+                                    <%= select.podName || "Destination" %>
+                                </option>
+                                <option value="0">
+                                    <%="ALL" %>
                                 </option>
                                 <% for(let data of POD){%>
+                                     <%if(data.name != "-"){%>
+                                    
                                     <option value=<%=data.id%>>
                                         <%=data.name%>
                                     </option>
+                                    <%}%>
                                     <%}%>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-4 text-center" style="margin-top: 23px;">
                         <div>
-                            <button class="btn" style="width: 170px; border-radius: 30px; background-color: #E53935;"
+                            <button class="btn w-100" style="border-radius: 30px; background-color: #E53935;"
                                 type="submit"><a href="" id="req" onclick="req()"
-                                    style="color: white;padding: 10px 40px;">submit</a></button>
+                                    style="color: white;padding: 10px 40px;">Submit</a></button>
                         </div>
 
                     </div>
@@ -167,14 +180,14 @@
 
         <div class="table-wrap">
             <p style="font-weight: bold; display: inline;;">Current Search:</p>
-            <p style="display: inline;">Place of Receipt <%= select.polName %>
+            <p style="display: inline;">Place of Origin <%= select.polName %>
             </p>
             <p style="display: inline;">to</p>
             <p style="display: inline;">Destination <%= select.podName %>
             </p>
             <table class="table table-bordered">
                 <tr style="background-color:#E53935;">
-                    <th class="text-white" style="border-top-left-radius: 25px ; border: 1px solid white;">POL</th>
+                    <th class="text-white" style="border-top-left-radius: 25px ; border: 1px solid white;">PORT OF LOADING</th>
                     <th class="text-white">VESSEL</th>
                     <th class="text-white">VOYAGE</th>
                     <th class="text-white">BOOKING CUT OFF</th>
@@ -183,7 +196,17 @@
                     <th class="text-white">ETD</th>
                     <th class="text-white">ETA</th>
                     <th class="text-white">TRANSSHIPMENT HUB</th>
-                    <th class="text-white" style="border-top-right-radius: 25px ; border: 1px solid white;">POD</th>
+                    <th class="text-white">PORT OF DISCHARGE</th>
+                    <th class="text-white">CONNECTING VESSEL</th>
+                    <th class="text-white">VOYAGE</th>
+                    <th class="text-white">CFS CUT OFF</th>
+                    <th class="text-white">CY CUT OFF</th>
+                    <th class="text-white">ETD</th>
+                    <th class="text-white">ETA</th> 
+                    <th class="text-white">SERVICE</th>
+                    <th class="text-white">CARRIER</th>
+                    <th class="text-white">TRANSIT TIME</th>
+                    <th class="text-white" style="border-top-right-radius: 25px ; border: 1px solid white;">Remark</th>
                 </tr>
 
                 <% for(let data of all){%>
@@ -217,6 +240,36 @@
                         </td>
                         <td>
                             <%=data.discharge.name%>
+                        </td>
+                        <td>
+                            <%=data.connecting_vessel.name%>
+                        </td>
+                        <td>
+                            <%=data.voyage_optional%>
+                        </td>
+                        <td>
+                            <%=data.cfs_cutoff_optional%>
+                        </td>
+                        <td>
+                            <%=data.cy_cutoff_optional%>
+                        </td>
+                        <td>
+                            <%=data.etd_optional%>
+                        </td>
+                        <td>
+                            <%=data.eta_optional%>
+                        </td>
+                        <td>
+                            <%=data.service.name%>
+                        </td>
+                        <td>
+                            <%=data.carrier%>
+                        </td>
+                        <td>
+                            <%=data.transit_time%>
+                        </td>
+                        <td>
+                            <%=data.remark%>
                         </td>
                     </tr>
                     <%}%>

@@ -17,23 +17,20 @@ router.get('/', (req, res) => {
 
   const polName = req.query.polName
   const podName = req.query.podName
-  const url3 = `https://activtrack.lk/web/vessel?pol=${pol}&pod=${pod}`
 
   const getPOL = axios.get(url1)
   const getPOD = axios.get(url2)
-  const POLD = axios.get(url3)
 
 
-  axios.all([getPOL, getPOD, POLD]).then(
+  axios.all([getPOL, getPOD]).then(
     axios.spread((...alldata) => {
       const POL = alldata[0].data
       const POD = alldata[1].data
-      const POLD = alldata[2].data
       const select = {
         polName: polName,
         podName: podName
       }
-      const data = { POL: POL, POD: POD, all: POLD, select: select }
+      const data = { POL: POL, POD: POD,  select: select }
       res.render('home', data);
     })
   ).catch((err => {
@@ -56,8 +53,8 @@ router.get('/Vessel-Schedule', (req, res) => {
   const pol = req.query.pol || 0
   const pod = req.query.pod || 0
 
-  const polName = req.query.polName
-  const podName = req.query.podName
+  const polName = req.query.polName || "All"
+  const podName = req.query.podName || "All"
   const url3 = `https://activtrack.lk/web/vessel?pol=${pol}&pod=${pod}`
 
   const getPOL = axios.get(url1)
